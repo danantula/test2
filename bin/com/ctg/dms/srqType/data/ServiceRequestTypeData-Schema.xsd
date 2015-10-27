@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="ServiceRequestTypeData" type="serviceRequestTypeData"/>
+
+  <xs:complexType name="column">
+    <xs:sequence/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="xpath" type="xs:string"/>
+    <xs:attribute name="mandatory" type="xs:boolean" use="required"/>
+    <xs:attribute name="dotWalkPath" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ColumnsGroup">
+    <xs:sequence>
+      <xs:element name="Column" type="column" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="DateRange">
+    <xs:sequence>
+      <xs:element name="scriptType" type="Detail" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Detail">
+    <xs:sequence/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="xpath" type="xs:string"/>
+    <xs:attribute name="rdhiQuestion" type="xs:string"/>
+    <xs:attribute name="period" type="xs:string"/>
+    <xs:attribute name="columnsGroup" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="detail">
+    <xs:sequence>
+      <xs:element name="detailParameter" type="xs:string"/>
+      <xs:element name="hintText" type="xs:string"/>
+      <xs:element name="validations" type="xs:string"/>
+      <xs:element name="regex" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="decoder" type="xs:string" minOccurs="0"/>
+      <xs:element name="dateRange_YES" type="DateRange" minOccurs="0"/>
+      <xs:element name="dateRange_NO" type="DateRange" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="serviceRequestTypeData">
+    <xs:sequence>
+      <xs:element name="Detail" type="detail" maxOccurs="unbounded"/>
+      <xs:element name="ColumnsGroup" type="ColumnsGroup" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
